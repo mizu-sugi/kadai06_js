@@ -1,0 +1,194 @@
+html,body{
+    height:100%; margin: 0;
+}
+
+.main-container {
+    display: flex;
+    height:100%;
+}
+
+header{
+    font-size:30px;
+    text-align: center;
+    background-color: lightyellow;
+}
+
+body{
+    background-color: lightyellow;
+}
+
+#mapContainer {
+    flex: 1;
+}
+
+
+
+
+#textarea {
+    width: 100%; height: 100%; overflow-y: auto; margin-left:10px;
+}
+
+
+/* メモエリア */
+
+#save1, #save2, #save3, #save4, #save5 {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+
+#save1:hover{
+    opacity: 0.3;
+}
+#save2:hover{
+    opacity: 0.3;
+}
+#save3:hover{
+    opacity: 0.3;
+}
+#save4:hover{
+    opacity: 0.3;
+}
+#save5:hover{
+    opacity: 0.3;
+}
+
+.remove{
+    cursor: pointer;
+}
+#memo-container {
+    
+    flex-direction: column; /* 縦並びにする */
+    align-items: center; 
+    width: 30%; /* マップの幅の残りを占めるように調整 */
+    overflow-y: auto; /* スクロールバーを表示 */
+    height: 100%;
+  
+}
+
+
+
+.memo1 {
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 200px;
+    width:95%;
+    background-color: lightblue;
+    border-radius: 10px;
+    margin-left:10px;
+    margin-top:5px;
+}
+
+.memo1 h1{
+    font-size: 18px;
+}
+
+
+
+.memo2 {
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 200px;
+    width:95%;
+    background-color: lightblue;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left:10px;
+}
+
+.memo2 h1{
+    font-size: 18px;
+}
+
+.memo3 {
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 200px;
+    width:95%;
+    background-color: lightblue;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left:10px;
+}
+
+.memo3 h1{
+    font-size: 18px;
+}
+
+.memo4 {
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 200px;
+    width:95%;
+    background-color: lightblue;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left:10px;
+}
+
+.memo4 h1{
+    font-size: 18px;
+}
+
+.memo5 {
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 200px;
+    width:95%;
+    background-color: lightblue;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left:10px;
+}
+
+.memo5 h1{
+    font-size: 18px;
+}
+
+
+/* スライドショー */
+
+
+.slides {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 250px; /* スライドの高さ */
+    display: flex;
+    justify-content: center; /* 中央寄せ */
+}
+
+.slide-container {
+    display: flex;
+    transition: transform 1s ease; /* スライドのアニメーション効果 */
+}
+
+.slide-container img {
+    margin-right: 10px; /* 画像の間隔 */
+}
+
+
+
+
+
+/* レスポンシブ */
+@media screen and (max-width: 768px){
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #memo-container {
+        width: 90%;
+        overflow-y: auto; /* スクロールバーを表示 */
+    
+    }
+
+
+}

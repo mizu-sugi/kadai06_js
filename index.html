@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title>Trip to Minnesota</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<script src="./js/firebase.js"></script>
+
+</head>
+
+
+<body>
+
+<header>
+    夏休みの旅行MAP2024🛫
+</header>
+
+<div class="main-container">
+    <!-- MAP[START] -->
+    <div id="myMap" style='position:relative;width: 70%;height:500px;'></div>
+    <!-- MAP[END] -->
+
+    <!-- Right side textarea for displaying memo -->
+    <div id="memo-container">
+
+        <div class="memo1">
+            <h1>①ミネアポリス・セントポール国際空港</h1>
+            <div class="textArea">
+                <textarea id="text1" cols="30" rows="2"></textarea>
+                <button id="save1" data-memo="memo1">SAVE</button>
+                <div id="output1" style="overflow: auto; height: 100px;"></div>
+            </div>
+        </div>
+
+        <div class="memo2">
+            <h1>②モール・オブ・アメリカ</h1>
+            <div class="textArea">
+                <textarea id="text2" cols="30" rows="2"></textarea>
+                <button id="save2" data-memo="memo2">SAVE</button>
+                <div id="output2" style="overflow: auto; height: 100px;"></div>
+            </div>     
+        </div>
+        <div class="memo3">
+            <h1>③MASON & JAXONの家</h1>
+            <div class="textArea">
+                <textarea id="text3" cols="30" rows="2"></textarea>
+                <button id="save3" data-memo="memo3">SAVE</button>
+                <div id="output3" style="overflow: auto; height: 100px;"></div>
+            </div> 
+        </div>
+        <div class="memo4">
+            <h1>④SCSU</h1>
+            <div class="textArea">
+                <textarea id="text4" cols="30" rows="2"></textarea>
+                <button id="save4" data-memo="memo4">SAVE</button>
+                <div id="output4" style="overflow: auto; height: 100px;"></div>
+            </div>  
+        </div>
+    
+        <div class="memo5">
+            <h1>⑤Albertville Premium outlet</h1>
+            <div class="textArea">
+                <textarea id="text5" cols="30" rows="2"></textarea>
+                <button id="save5" data-memo="memo5">SAVE</button>
+                <div id="output5" style="overflow: auto; height: 100px;"></div>
+            </div>  
+        </div>
+    </div>
+
+</div>
+
+     <!-- スライドショー -->
+     <section class="slides">
+        
+        <div class="slide-container">
+                <img src="./img/NBA.jpg" width="350px" height="250px">
+                <img src="./img/MLB.jpg" width="350px" height="250px">
+                <img src="./img/minneapolis.jpg" width="350px" height="250px">
+                <img src="./img/lake.jpg" width="350px" height="250px">
+                <img src="./img/cherry.jpg" width="350px" height="250px">
+                <img src="./img/waterfall.jpg" width="350px" height="250px">
+        </div>      
+    </section>
+
+
+
+<script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=API' async defer></script>
+<script src="js/BmapQuery.js"></script>
+
+<script>
+
+function GetMap() {
+    //------------------------------------------------------------------------
+    //1. Instance
+    //------------------------------------------------------------------------
+    const map = new Bmap("#myMap");
+    //------------------------------------------------------------------------
+    //2. Display Map
+    //------------------------------------------------------------------------
+    map.startMap(45.24723178592547, -93.66919756931279, "load", 9);
+
+    //----------------------------------------------------
+            //3. Infobox
+        //   options = new Array();
+        //   options[index] = { lat, lon, width, height, title, pinColor, description, show };
+        //----------------------------------------------------
+        const options = [];
+        options[0]={
+            "lat":44.88624814550893,
+            "lon":-93.21271387994727,
+            "title":"①ミネアポリス・セントポール国際空港",
+            "pinColor":"#ff0000",
+            "pinText":"A",
+            "height":300,
+            "width":320,
+            "description": '<img src="../img/MSP.jpg" width="300"></div><>羽田空港からの直行便<br>行き：約12時間 帰り：約13時間 <a href="https://www.mspairport.com/">＜HP＞</a>',
+            "show":false
+        };
+        
+        options[1]={
+            "lat":44.855306224576644,
+            "lon":-93.24212896931279,
+            "title":"②モール・オブ・アメリカ",
+            "pinColor":"#ff0000",
+            "height":300,
+            "width":320,
+            "description": '<img src="../img/MOA.jpg" width="300", height="150"><br>北米で一番大きいショッピングモール<br>スポンジボブの遊園地あるよ <a href="https://mallofamerica.com/">＜HP＞</a>',
+            "show":false
+        };
+        options[2]={
+            "lat":45.24750371582989,
+            "lon":-93.66924048465638,
+            "title":"⑤Albertville Premium outlet",
+            "pinColor":"#ff0000",
+            "height":300,
+            "width":320,
+            "description": 'プレミアムアウトレット <a href="https://www.premiumoutlets.com/outlet/albertville">＜HP＞</a><br><img src="../img/APO.jpg" width="300", height="150">',
+            "show":false
+        };
+
+        
+        options[3]={
+            "lat":45.545918792435636,
+            "lon":-94.1806277419775,
+            "title":"③MASON & JAXSON の家",
+            "pinColor":"#ff0000",
+            "height":300,
+            "width":320,
+            "description": 'Mason & Jaxonの家<br><img src="../img/limpert.jpg" width="300", height="150">',
+            "show":false
+        };
+
+        options[4]={
+            "lat":45.54943541916469,
+            "lon":-94.15170836137442,
+            "title":"④セントクラウド大学",
+            "pinColor":"#ff0000",
+            "height":300,
+            "width":320,
+            "description": 'ママが行ってた大学 <a href="https://www.stcloudstate.edu/">＜HP＞</a><br><img src="../img/scsu.jpg" width="300", height="150">',
+            "show":false
+        };
+
+
+
+              //----------------------------------------------------
+        //4. Switch infoboxs
+        //   infoboxLayers(options, true); //true=one, false=Multiple
+        //----------------------------------------------------
+        map.infoboxLayers(options,true);
+
+
+        //B.Get geocode of click location
+    map.onGeocode("click", function(data){
+        console.log(data);                   //Get Geocode ObjectData
+        const lat = data.location.latitude;  //Get latitude
+        const lon = data.location.longitude; //Get longitude
+        map.changeMap(lat, lon, "load", 9);
+    });
+       
+}   
+
+
+
+
+
+    </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getDatabase, ref, push, set, update, remove, onChildAdded, onChildRemoved, onChildChanged }
+    from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const dbRefMemo1 = ref(db,"memo/memo1");
+    const dbRefMemo2 = ref(db,"memo/memo2");
+    const dbRefMemo3 = ref(db,"memo/memo3");
+    const dbRefMemo4 = ref(db,"memo/memo4");
+    const dbRefMemo5 = ref(db,"memo/memo5");
+
+    //保存
+ $("#save1").on("click", function(){
+    const msg = {
+     text : $("#text1").val()
+    }
+    const newPostRef = push(dbRefMemo1);
+    set(newPostRef,msg);
+});
+
+$("#save2").on("click", function(){
+    const msg = {
+     text : $("#text2").val()
+    }
+    const newPostRef = push(dbRefMemo2);
+    set(newPostRef,msg);
+});
+
+$("#save3").on("click", function(){
+    const msg = {
+     text : $("#text3").val()
+    }
+    const newPostRef = push(dbRefMemo3);
+    set(newPostRef,msg);
+});
+
+$("#save4").on("click", function(){
+    const msg = {
+     text : $("#text4").val()
+    }
+    const newPostRef = push(dbRefMemo4);
+    set(newPostRef,msg);
+});
+
+$("#save5").on("click", function(){
+    const msg = {
+     text : $("#text5").val()
+    }
+    const newPostRef = push(dbRefMemo5);
+    set(newPostRef,msg);
+});
+
+    //最初にデータ取得
+    onChildAdded(dbRefMemo1, function(data){
+        const msg = data.val();
+        const key = data.key; //削除、更新に必須
+        let h = '<p id="'+key+'">';
+           
+            h += '<span contentEditable="true" id="'+key+'_update">'+msg.text+'</span>';
+            h += '<span class = "remove" data-key="'+key+'">🗑️</span>'
+            
+            h +='</p>';
+            $("#output1").prepend(h);
+    });
+
+     onChildAdded(dbRefMemo2, function(data){
+         const msg = data.val();
+         const key = data.key; //削除、更新に必須
+         let h = '<p id="'+key+'">';
+           
+             h += '<span contentEditable="true" id="'+key+'_update">'+msg.text+'</span>';
+             h += '<span class = "remove" data-key="'+key+'">🗑️</span>'
+           
+             h +='</p>';
+             $("#output2").prepend(h);
+     });
+
+     onChildAdded(dbRefMemo3, function(data){
+         const msg = data.val();
+         const key = data.key; //削除、更新に必須
+         let h = '<p id="'+key+'">';
+           
+             h += '<span contentEditable="true" id="'+key+'_update">'+msg.text+'</span>';
+             h += '<span class = "remove" data-key="'+key+'">🗑️</span>'
+           
+             h +='</p>';
+             $("#output3").prepend(h);
+     });
+
+     onChildAdded(dbRefMemo4, function(data){
+         const msg = data.val();
+         const key = data.key; //削除、更新に必須
+         let h = '<p id="'+key+'">';
+           
+             h += '<span contentEditable="true" id="'+key+'_update">'+msg.text+'</span>';
+             h += '<span class = "remove" data-key="'+key+'">🗑️</span>'
+             
+             h +='</p>';
+             $("#output4").prepend(h);
+     });
+
+     onChildAdded(dbRefMemo5, function(data){
+         const msg = data.val();
+         const key = data.key; //削除、更新に必須
+         let h = '<p id="'+key+'">';
+           
+             h += '<span contentEditable="true" id="'+key+'_update">'+msg.text+'</span>';
+             h += '<span class = "remove" data-key="'+key+'">🗑️</span>'
+            
+             h +='</p>';
+             $("#output5").prepend(h);
+     });
+
+    //削除イベント
+    $("#output1").on("click", ".remove", function(){
+        const key = $(this).attr("data-key");
+        const remove_item = ref(db, "memo/memo1/"+key);
+        remove(remove_item); //Firebase削除
+    });
+    $("#output2").on("click", ".remove", function(){
+        const key = $(this).attr("data-key");
+        const remove_item = ref(db, "memo/memo2/"+key);
+        remove(remove_item); //Firebase削除
+    });
+    $("#output3").on("click", ".remove", function(){
+        const key = $(this).attr("data-key");
+        const remove_item = ref(db, "memo/memo3/"+key);
+        remove(remove_item); //Firebase削除
+    });
+    $("#output4").on("click", ".remove", function(){
+        const key = $(this).attr("data-key");
+        const remove_item = ref(db, "memo/memo4/"+key);
+        remove(remove_item); //Firebase削除
+    });
+    $("#output5").on("click", ".remove", function(){
+        const key = $(this).attr("data-key");
+        const remove_item = ref(db, "memo/memo5/"+key);
+        remove(remove_item); //Firebase削除
+    });
+
+
+
+
+
+    //削除処理がFirebase側で実行されたらイベント発生
+    onChildRemoved(dbRefMemo1, (data) => {
+        $("#"+data.key).remove();
+    });
+    onChildRemoved(dbRefMemo2, (data) => {
+        $("#"+data.key).remove();
+    });
+    onChildRemoved(dbRefMemo3, (data) => {
+        $("#"+data.key).remove();
+    });
+    onChildRemoved(dbRefMemo4, (data) => {
+        $("#"+data.key).remove();
+    });
+    onChildRemoved(dbRefMemo5, (data) => {
+        $("#"+data.key).remove();
+    });
+
+// スライドショー
+    let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    let i;
+    const slides = document.querySelectorAll('.slide-container img');
+    const slideContainer = document.querySelector('.slide-container');
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}
+    slides[slideIndex-1].style.display = "block";
+
+    // 1秒ごとに次のスライドに切り替える
+    setTimeout(showSlides, 1000);
+}
+
+
+
+
+  </script>
+</body>
+</html>
